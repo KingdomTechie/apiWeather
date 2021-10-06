@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require("express");
 const https = require("https")
 
@@ -6,7 +7,7 @@ const app = express();
 app.use(express.urlencoded({extended: true}));
 
 app.get("/", function (req, res) {
-    const url = "https://api.openweathermap.org/data/2.5/weather?q=90404,us&appid=a4ce1690db51c0756a4b8a173931736d&units=imperial"
+    const url = `https://api.openweathermap.org/data/2.5/weather?q=90404,us&appid=${process.env.WEATHER_API}&units=imperial`
 
     //This code snippit makes the API call once client browser hits this home route path (/)
     https.get(url, function(response) {
@@ -47,6 +48,6 @@ app.get("/lotr", function (req, res) {
 })
 
 
-app.listen(3000, function () {
+app.listen(5000, function () {
     console.log("Weather Application is listening on port 3000")
 })
